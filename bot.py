@@ -1,4 +1,7 @@
+from flask import Flask, request, jsonify, send_from_directory
 import random
+
+app = Flask(__name__)
 
 class Chatbot:
     def __init__(self):
@@ -48,6 +51,15 @@ class Chatbot:
                 response = self.get_response(user_input)
                 print(f"Chatbot: {response}")
 
-if __name__ == "__main__":
-    chatbot = Chatbot()
-    chatbot.start_chat()
+@app.route('/')
+def index():
+    return send_from_directory('.', 'index.html')
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_input = request.json.get('message')
+    response = chatbot.get_response(user_input)
+    return jsonify(response=response)
+
+if __name__ == '__main__':
+    app.run(debug=True)
