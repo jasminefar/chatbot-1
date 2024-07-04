@@ -27,29 +27,7 @@ class Chatbot:
                 return random.choice(self.responses[key])
         return random.choice(self.responses["default"])
 
-    def ask_for_name(self):
-        name = input("By the way, what is your name? ")
-        print(f"Nice to meet you, {name}!")
-
-    def small_talk(self):
-        topics = ["Have you read any good books lately?", "What's your favorite movie?", "Do you have any pets?", "What do you like to do for fun?"]
-        return random.choice(topics)
-
-    def start_chat(self):
-        print(random.choice(self.greetings))
-        self.ask_for_name()
-        print("Let's have a chat! Feel free to ask me anything or just talk.")
-        print("If you want to stop chatting, just type 'bye', 'exit', or 'quit'.")
-        while True:
-            user_input = input("You: ")
-            if user_input.lower() in ["bye", "exit", "quit"]:
-                print(random.choice(self.farewells))
-                break
-            if user_input.lower() == "small talk":
-                print(f"Chatbot: {self.small_talk()}")
-            else:
-                response = self.get_response(user_input)
-                print(f"Chatbot: {response}")
+chatbot = Chatbot()
 
 @app.route('/')
 def index():
